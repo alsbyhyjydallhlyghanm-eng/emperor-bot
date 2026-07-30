@@ -7,7 +7,7 @@ from flask import Flask, render_template_string
 from threading import Thread
 
 # ==========================================
-# بوت الإمبراطور المحترف - النسخة المعدلة لتعمل على Render بنجاح 👑
+# بوت الإمبراطور المحترف - النسخة الكاملة والمحدثة 👑
 # ==========================================
 
 TOKEN = "8870951794:AAHCEODY8KC-lYgHA8M6XJJYjoijX9eqQx0"
@@ -89,7 +89,7 @@ def update_user_balance(user_id, amount):
     conn.close()
 
 # ==========================================
-# دوال الاتصال بـ API موقع SMSPool (مربوطة بالكامل)
+# دوال الاتصال بـ API موقع SMSPool
 # ==========================================
 def smspool_buy_number(country_id, service_id):
     url = "https://api.smspool.net/purchase/sms"
@@ -220,7 +220,7 @@ def send_welcome(message):
         bot.send_message(message.chat.id, welcome_text, reply_markup=markup)
 
 # ==========================================
-# معالج الأزرار والتفاعل بالكامل
+# معالج الأزرار والتفاعل بالكامل (محدث بالكامل)
 # ==========================================
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
@@ -287,7 +287,43 @@ def callback_query(call):
         markup.add(telebot.types.InlineKeyboardButton("🔙 - العودة للقائمة", callback_data="back_home"))
         bot.edit_message_text("🛍️ **اختر الدولة لتفعيل واتساب:**", call.message.chat.id, call.message.message_id, reply_markup=markup, parse_mode="Markdown")
 
-    # --- زر الإدارة العليا والمطور (تم الإصلاح والتفعيل) ---
+    # --- زر الرشق والحسابات (تمت الإضافة لتفعيل الزر) ---
+    elif call.data == "boost":
+        bot.answer_callback_query(call.id, "قسم الرشق والحسابات")
+        text = (
+            f"🎲 **قسم الرشق والحسابات والتليجرام** 👥\n\n"
+            f"☑️ هذا القسم مخصص لخدمات رشق المشاهدات والمتابعين والحسابات الوهمية.\n"
+            f"💬 لتفعيل الخدمات أو إضافتها، يرجى التواصل مع المطور مباشرة."
+        )
+        m = telebot.types.InlineKeyboardMarkup()
+        m.add(
+            telebot.types.InlineKeyboardButton("👤 التواصل مع المطور", url=f"https://t.me/{DEVELOPER_USERNAME}"),
+            telebot.types.InlineKeyboardButton("🔙 - العودة للقائمة", callback_data="back_home")
+        )
+        bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=m, parse_mode="Markdown")
+
+    # --- زر خدمات ومميزات (تمت الإضافة لتفعيل الزر) ---
+    elif call.data == "features":
+        bot.answer_callback_query(call.id, "خدمات ومميزات البوت")
+        text = (
+            f"🌟 **خدمات ومميزات بوت الإمبراطور** 💥\n\n"
+            f"1️⃣ جلب تلقائي وفوري للأرقام عبر منصة SMSPool.\n"
+            f"2️⃣ حماية وسرعة عالية في معالجة الطلبات والأكواد.\n"
+            f"3️⃣ نظام أرباح ونقاط مجانية عبر دعوة الأصدقاء.\n"
+            f"4️⃣ نشر تلقائي لعمليات الشراء الناجحة في القناة الرسمية."
+        )
+        bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=back_markup, parse_mode="Markdown")
+
+    # --- زر خدمات الموقع الشاملة / الأرقام التلقائية (تمت الإضافة لتفعيل الزر) ---
+    elif call.data == "dynamic_services":
+        bot.answer_callback_query(call.id, "الخدمات الشاملة والأرقام")
+        text = (
+            f"🌐 **قسم خدمات الأرقام الشاملة** ☎️\n\n"
+            f"يمكنك الاعتماد على قسمي (عروض تليجرام) و (عروض واتساب) للحصول على أفضل وأرخص الأرقام المتاحة حالياً بتحديث فوري من السيرفر."
+        )
+        bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=back_markup, parse_mode="Markdown")
+
+    # --- زر الإدارة العليا والمطور ---
     elif call.data == "admin":
         bot.answer_callback_query(call.id, "الإدارة العليا والمطور")
         admin_text = (
