@@ -10,7 +10,7 @@ from threading import Thread
 # بوت الإمبراطور المحترف - النسخة الكاملة والمحدثة 👑
 # ==========================================
 
-TOKEN = "8870951794:AAHCEODY8KC-lYgHA8M6XJJYjoijX9eqQx0"
+TOKEN = "8870951794:AAHsMGs4eL6wmkapIx4awS-UXyr8ZdfYZnE"
 CHANNEL_NAME = "@EmperorSMS_Channel"
 SMSPOOL_API_KEY = "Rsc8VKD2r6P0bk1A8WbObJZ7BOLL3F0v"
 DEVELOPER_USERNAME = "geedallh"
@@ -287,7 +287,7 @@ def callback_query(call):
         markup.add(telebot.types.InlineKeyboardButton("🔙 - العودة للقائمة", callback_data="back_home"))
         bot.edit_message_text("🛍️ **اختر الدولة لتفعيل واتساب:**", call.message.chat.id, call.message.message_id, reply_markup=markup, parse_mode="Markdown")
 
-    # --- زر الرشق والحسابات (تمت الإضافة لتفعيل الزر) ---
+    # --- زر الرشق والحسابات ---
     elif call.data == "boost":
         bot.answer_callback_query(call.id, "قسم الرشق والحسابات")
         text = (
@@ -302,7 +302,7 @@ def callback_query(call):
         )
         bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=m, parse_mode="Markdown")
 
-    # --- زر خدمات ومميزات (تمت الإضافة لتفعيل الزر) ---
+    # --- زر خدمات ومميزات ---
     elif call.data == "features":
         bot.answer_callback_query(call.id, "خدمات ومميزات البوت")
         text = (
@@ -314,7 +314,7 @@ def callback_query(call):
         )
         bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=back_markup, parse_mode="Markdown")
 
-    # --- زر خدمات الموقع الشاملة / الأرقام التلقائية (تمت الإضافة لتفعيل الزر) ---
+    # --- زر خدمات الموقع الشاملة ---
     elif call.data == "dynamic_services":
         bot.answer_callback_query(call.id, "الخدمات الشاملة والأرقام")
         text = (
